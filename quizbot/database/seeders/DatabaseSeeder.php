@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
 
         $questionAndAnswers = $this->getData();
         foreach ($tracks as $track) {
-            $questionAndAnswers->where('track',$track->id)->each(function ($questions) {
+            $questionAndAnswers->where('track',$track->id)->each(function ($question) {
                 $createdQuestion = Question::create([
                     'text' => $question['question'],
-                    'track_id' => $questions['track'],
-                    'question' => $questions['question'],
+                    'track_id' => $question['track'],
+                    'question' => $question['question'],
                 ]);
                 collect($question['answers'])->each(function ($answer) use ($createdQuestion) {
                     Answer::create([
