@@ -37,6 +37,23 @@ class BotManController extends Controller
             $bot->reply('Poa sana!');
         });
 
+        $botman->hears('start | /start', function (BotMan $bot) {
+            $bot->startConversation(new QuizConversation());
+        })->stopsConversation();
+
+        $botman->hears('/highscore |highscore', function (BotMan $bot) {
+            $bot->startConversation(new HighscoreConversation());
+        })->stopsConversation();
+
+        $botman->hears('/about |about', function (BotMan $bot) {
+            $bot->reply("This quizbot will give you a round of questions to test yourself on the knowledge of current IT trends");
+        })->stopsConversation();
+
+        $botman->hears('/deletedata |deletedeata', function (BotMan $bot) {
+            $bot->startConversation(new PrivacyConversation());
+        })->stopsConversation();
+        
+
         $botman->listen();
 
     }
