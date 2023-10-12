@@ -27,7 +27,9 @@ class BotManController extends Controller
 
         $botman = BotManFactory::create($config, new LaravelCache());
 
-        $botman->hears('Mambo', function (BotMan $bot) {
+        $botman->middleware->captured(new PreventDoubleClicks);
+
+        $botman->hears('Mambo | /aanza', function (BotMan $bot) {
             $bot->reply('Safi nzima!');
         });
 
